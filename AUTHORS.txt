@@ -2,25 +2,32 @@ Syntax highlighting with language autodetection.
 
 URL:   https://highlightjs.org/
 
-Current core developers (alphabetical):
+
+Current Core Team:
+
+- Josh Goebel <hello@joshgoebel.com> (maintainer)
+- Egor Rogov <e.rogov@postgrespro.ru>
+- Vladimir Jimenez <me@allejo.io>
+
+Former maintainers:
+
+- Ivan Sagalaev <maniac@softwaremaniacs.org> (original author)
+- Jeremy Hull <sourdrums@gmail.com>
+- Oleg Efimov <efimovov@gmail.com>
+
+Former Core Team members:
 
 - Gidi Meir Morris <gidi@gidi.io>
 - Jan T. Sott <git@idleberg.com>
 - Li Xuanji <xuanji@gmail.com>
 - Marcos Cáceres <marcos@marcosc.com>
 - Sang Dang <sang.dang@polku.io>
-- Josh Goebel <hello@joshgoebel.com>
 
-Former maintainers:
-
-- Ivan Sagalaev (original author) <maniac@softwaremaniacs.org>
-- Jeremy Hull <sourdrums@gmail.com>
-- Oleg Efimov <efimovov@gmail.com>
 
 Contributors:
 
 - Peter Leonov <gojpeg@gmail.com>
-- Vanessa Sochat <@vsoch>
+- Vanessa Sochat (https://github.com/vsoch)
 - Victor Karamzin <Victor.Karamzin@enterra-inc.com>
 - Vsevolod Solovyov <vsevolod.solovyov@gmail.com>
 - Anton Kovalyov <anton@kovalyov.net>
@@ -289,3 +296,19 @@ Contributors:
 - Jim Mason <jmason@ibinx.com>
 - lioshi <lioshi@lioshi.com>
 - David Pine <david.pine.7@gmail.com>
+- Konrad Rudolph <konrad.rudolph@gmail.com>
+- Tom Wallace <thomasmichaelwallace@gmail.com>
+- Michael Newton (https://github.com/miken32)
+- Richard Gibson (https://github.com/gibson042)
+- Fredrik Ekre <ekrefredrik@gmail.com>
+- Jan Pilzer (https://github.com/Hirse)
+- Jonathan Sharpe <mail@jonrshar.pe>
+- Michael Rush <michaelrush@gmail.com>
+- Florian Bezdeka <florian@bezdeka.de>
+- Marat Nagayev <nagaevmt@yandex.ru>
+- Patrick Scheibe <patrick@halirutan.de>
+- Kyle Brown (https://github.com/kylebrown9)
+- Marcus Ortiz <mportiz08@gmail.com>
+- Guillaume Grossetie <ggrossetie@yuzutech.fr>
+- Steven Van Impe <steven.vanimpe@icloud.com>
+- Martin Dørum <martid0311@gmail.com>

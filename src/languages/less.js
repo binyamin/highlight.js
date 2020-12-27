@@ -6,9 +6,15 @@ Website: http://lesscss.org
 Category: common, css
 */
 
+import * as css_shared from "./lib/css-shared.js";
+
+/** @type LanguageFn */
 export default function(hljs) {
+  const PSEUDO_SELECTORS = css_shared.PSEUDO_SELECTORS;
+
+
   var IDENT_RE        = '[\\w-]+'; // yes, Less identifiers may begin with a digit
-  var INTERP_IDENT_RE = '(' + IDENT_RE + '|@{' + IDENT_RE + '})';
+  var INTERP_IDENT_RE = '(' + IDENT_RE + '|@\\{' + IDENT_RE + '\\})';
 
   /* Generic Modes */
 
@@ -42,7 +48,7 @@ export default function(hljs) {
     IDENT_MODE('number', '#[0-9A-Fa-f]+\\b'),
     PARENS_MODE,
     IDENT_MODE('variable', '@@?' + IDENT_RE, 10),
-    IDENT_MODE('variable', '@{'  + IDENT_RE + '}'),
+    IDENT_MODE('variable', '@\\{'  + IDENT_RE + '\\}'),
     IDENT_MODE('built_in', '~?`[^`]*?`'), // inline javascript (or whatever host language) *multiline* string
     { // @media features (it’s here to not duplicate things in AT_RULE_MODE with extra PARENS_MODE overriding):
       className: 'attribute', begin: IDENT_RE + '\\s*:', end: ':', returnBegin: true, excludeEnd: true
@@ -54,7 +60,7 @@ export default function(hljs) {
   );
 
   var VALUE_WITH_RULESETS = VALUE.concat({
-    begin: '{', end: '}', contains: RULES
+    begin: /\{/, end: /\}/, contains: RULES
   });
 
   var MIXIN_GUARD_MODE = {
@@ -68,6 +74,7 @@ export default function(hljs) {
     begin: INTERP_IDENT_RE + '\\s*:', returnBegin: true, end: '[;}]',
     relevance: 0,
     contains: [
+      { begin: /-(webkit|moz|ms|o)-/ },
       {
         className: 'attribute',
         begin: INTERP_IDENT_RE, end: ':', excludeEnd: true,
@@ -107,7 +114,7 @@ export default function(hljs) {
     variants: [{
       begin: '[\\.#:&\\[>]', end: '[;{}]'  // mixin calls end with ';'
       }, {
-      begin: INTERP_IDENT_RE, end: '{'
+      begin: INTERP_IDENT_RE, end: /\{/
     }],
     returnBegin: true,
     returnEnd:   true,
@@ -118,15 +125,23 @@ export default function(hljs) {
       hljs.C_BLOCK_COMMENT_MODE,
       MIXIN_GUARD_MODE,
       IDENT_MODE('keyword',  'all\\b'),
-      IDENT_MODE('variable', '@{'  + IDENT_RE + '}'),     // otherwise it’s identified as tag
+      IDENT_MODE('variable', '@\\{'  + IDENT_RE + '\\}'),     // otherwise it’s identified as tag
       IDENT_MODE('selector-tag',  INTERP_IDENT_RE + '%?', 0), // '%' for more consistent coloring of @keyframes "tags"
       IDENT_MODE('selector-id', '#' + INTERP_IDENT_RE),
       IDENT_MODE('selector-class', '\\.' + INTERP_IDENT_RE, 0),
       IDENT_MODE('selector-tag',  '&', 0),
       {className: 'selector-attr', begin: '\\[', end: '\\]'},
-      {className: 'selector-pseudo', begin: /:(:)?[a-zA-Z0-9\_\-\+\(\)"'.]+/},
+      {className: 'selector-pseudo', begin: /:(:)?[a-zA-Z0-9_\-+"'.]+/},
       {begin: '\\(', end: '\\)', contains: VALUE_WITH_RULESETS}, // argument list of parametric mixins
       {begin: '!important'} // eat !important after mixin call or it will be colored as tag
+    ]
+  };
+
+  const PSEUDO_SELECTOR_MODE = {
+    begin: IDENT_RE + ':(:)?' + `(${PSEUDO_SELECTORS.join('|')})`,
+    returnBegin: true,
+    contains: [
+      SELECTOR_MODE
     ]
   };
 
@@ -135,6 +150,7 @@ export default function(hljs) {
     hljs.C_BLOCK_COMMENT_MODE,
     AT_RULE_MODE,
     VAR_RULE_MODE,
+    PSEUDO_SELECTOR_MODE,
     RULE_MODE,
     SELECTOR_MODE
   );
